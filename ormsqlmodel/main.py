@@ -27,3 +27,10 @@ def start():
 @app.get("/")
 def read_root():
     return {"message": "Hello, World!"}
+
+
+
+
+@app.get("/getStudents")
+def getStudents():
+    query = Students.select().where(Students.is_active == True)
