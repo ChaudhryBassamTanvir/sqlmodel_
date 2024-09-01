@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Body, Query, Path  # type: ignore
 import uvicorn  # type: ignore
-from sqlmodel import SQLModel, create_engine, Field ,Session # type: ignore
+from sqlmodel import SQLModel, create_engine,select , Field ,Session # type: ignore
 #E58rnAfdhRLmEXme
 # Define the connection string
 connection_string = 'postgresql://postgres.ntgeqvexrciajpvomdvg:E58rnAfdhRLmEXme@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres'
@@ -19,10 +19,9 @@ class Students(SQLModel, table=True):  # Corrected 'tabel' to 'table'
 # Create the tables in the database
 SQLModel.metadata.create_all(connection)
 
-# Define a start function to run the application
-def start():
-    uvicorn.run("ormsqlmodel.main:app", host="127.0.0.1", port=8000, reload=True)
 
+
+#
 # Add a simple route for testing
 @app.get("/")
 def read_root():
@@ -32,6 +31,24 @@ def read_root():
 
 
 @app.get("/getStudents")
-def getStudents():
-        with Session(connection) as session:
-            statement = select (Hero)
+def get_students():
+    with Session(connection) as session:
+        statement = select(Students)
+        result = session.execute(statement)
+        data = result.scalars().all()  # .all() fetches all records as a list
+        return data
+    
+    
+@app.get("/getSingleStudents")
+def get_single_students():
+    with Session(connection) as session:
+        statement = select(Students).where(Students.name=="Bassam")
+        result = session.execute(statement)
+        data = result.scalars().all()  # .all() fetches all records as a list
+        return data
+
+# Define a start function to run the application
+def start():
+    uvicorn.run("ormsqlmodel.main:app", host="127.0.0.1", port=8000, reload=True)
+
+
