@@ -47,7 +47,7 @@ def get_single_students():
         data = result.scalars().all()  # .all() fetches all records as a list
         return data
 
-# Define a start function to run the application
+# a start function to run the application
 def start():
     uvicorn.run("ormsqlmodel.main:app", host="127.0.0.1", port=8000, reload=True)
 
