@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Body, Query, Path  # type: ignore
 import uvicorn  # type: ignore
-from sqlmodel import SQLModel, create_engine, Field  # type: ignore
+from sqlmodel import SQLModel, create_engine, Field ,Session # type: ignore
 #E58rnAfdhRLmEXme
 # Define the connection string
 connection_string = 'postgresql://postgres.ntgeqvexrciajpvomdvg:E58rnAfdhRLmEXme@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres'
@@ -33,4 +33,5 @@ def read_root():
 
 @app.get("/getStudents")
 def getStudents():
-    query = Students.select().where(Students.is_active == True)
+        with Session(connection) as session:
+            statement = select (Hero)
