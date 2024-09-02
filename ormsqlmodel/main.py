@@ -1,16 +1,16 @@
 from fastapi import FastAPI, Body, Query, Path  # type: ignore
 import uvicorn  # type: ignore
-from sqlmodel import SQLModel, create_engine,select , Field ,Session # type: ignore
+from sqlmodel import SQLModel, create_engine, select, Field, Session  # type: ignore
 #E58rnAfdhRLmEXme
 # Define the connection string
-connection_string = 'postgresql://postgres.ntgeqvexrciajpvomdvg:E58rnAfdhRLmEXme@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres'
+connection_string = ''
 connection = create_engine(connection_string)
 
 # Create the FastAPI instance
 app = FastAPI()
 
 # Define the Students model
-class Students(SQLModel, table=True):  # Corrected 'tabel' to 'table'
+class Students(SQLModel, table=True):  # type: ignore
     id: int = Field(default=None, primary_key=True)
     name: str
     age: int
