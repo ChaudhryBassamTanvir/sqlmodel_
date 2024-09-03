@@ -3,7 +3,7 @@ import uvicorn  # type: ignore
 from sqlmodel import SQLModel, create_engine, select, Field, Session  # type: ignore
 #E58rnAfdhRLmEXme
 # Define the connection string
-connection_string = ''
+connection_string = 'DB_URL'
 connection = create_engine(connection_string)
 
 # Create the FastAPI instance
