@@ -4,7 +4,6 @@ from sqlmodel import SQLModel, create_engine, select, Field, Session  # type: ig
 connection_string = 'DB_URL'
 connection = create_engine(connection_string)
 
-# Create the FastAPI instance
 app = FastAPI()
 
 # Define the Students model it will create tabel
