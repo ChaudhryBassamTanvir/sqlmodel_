@@ -6,7 +6,6 @@ connection = create_engine(connection_string)
 
 app = FastAPI()
 
-# Define the Students model it will create tabel
 class Students(SQLModel, table=True):  # type: ignore
     id: int = Field(default=None, primary_key=True)
     name: str
